@@ -1,0 +1,43 @@
+body {
+  text-align: center;
+  font-size: 34px;
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(255, 255, 255), 0 0 5px rgb(169, 169, 171);
+  color: rgb(0, 0, 0);
+  font-family: "Lucida Console", "Courier New", monospace; 
+  background-image: url('img_back.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+button {
+  position: relative;
+  background-color: #000000;
+  border: none;
+  font-size: 50px;
+  color: #fefefe;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: "Lucida Console", "Courier New", monospace; 
+} 
+
+input{
+  font-size: 25px
+}
+
+select{
+  font-size: 25px
+}
+button:hover {background-color: #cf4343}
+
+button:active {
+  background-color: #010702;
+  box-shadow: 0 5px rgb(200, 15, 15);
+  transform: translateY(4px);
+}
