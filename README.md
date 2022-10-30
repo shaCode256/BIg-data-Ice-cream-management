@@ -37,7 +37,7 @@ o Children and youth (age 6-18)
 ) age 19-45) adults o
 (46-55) adults o
 
-Three subsystems are:
+## Three subsystems are:
 • *A: an operational subsystem that will be represented by a simulator that sends messages to the broker with data
 Sales.
 
