@@ -1,60 +1,91 @@
-# Sales Simulator
-An operational subsystem that will be represented by a simulator that sends messages to the Kafka broker with data
-Sales, as part of the big data ice cream management system.
+# 🍦 Ice Cream Sales Management System (Kafka + Big Data Simulation)
 
+This project simulates and monitors the real-time sales and stock levels of various ice cream flavors across a large chain of branches. The system is divided into three main subsystems, integrating Kafka, Redis, MySQL, MongoDB, and BigML to support data ingestion, visualization, and prediction capabilities.
 
-## The essence of the solution:
-A system made up of three sub-systems which together allow real-time monitoring of ice cream flavors in stock
-In the branches, using Dashboard, as well as creating a prediction model, for a certain branch, what is going to be a profile
-his sales on a certain day
-1. Ice cream shop chain offers five flavors of ice cream: chocolate, vanilla, strawberry, lemon and halva.
-2. The system aggregates the branch data and their characteristics (at least 100 branches):
-• branch name
-• Settlement
-• Owner details
-• Current stock for every ice cream flavor
-3. The system will display in real time through a dashboard and appropriate graphs full of each of the flavors
-in each branch (Chart Bar), the total inventory of flavors in all branches (Chart Pie) and a forecast
-Sales of a certain branch for a certain taste for the coming week.
-4. The system will make it possible to learn from past data about the consumption of ice cream flavors and create a future consumption forecast
-From the following data:
-• day in the week
-• a month
-• Answers
-• Is it a holiday week
-Weather that day (very hot, hot, pleasant, cold, very cold)
-• Consumption level (for every taste):
-o zero (under a kilo)
-o Little (up to 20 kilos)
-o Medium (up to 60 kilos)
-o tall (up to 120 kilos)
-o Very tall (over 120 kilos)
-• Settlement size): eight values with an ordinal scale
-• Type of population (Jews, Arabs, mixed).
-• Age groups in the settlement (
-(0-5 years old) o
-o Children and youth (age 6-18)
-) age 19-45) adults o
-(46-55) adults o
+---
 
-## Three subsystems are:
-• *A: an operational subsystem that will be represented by a simulator that sends messages to the broker with data
-Sales.
+## 🎯 Project Objective
 
-• B: Dashboards subsystem and real-time data.
-o The subsystem will store in a Redis type database the status of each flavor
-Ice cream in each of the branches.
-o One of the screens will be used to request learning a model from subsystem C) that will prepare a set
-data and transfer to BigML,) as well as it will be possible to predict consumption on the same screen
-Ice cream at a certain branch, on a certain date for a certain ice cream flavor.
+To develop a big data system that:
+- Monitors real-time stock levels of five ice cream flavors across at least 100 branches.
+- Visualizes current stock and total inventory with a live dashboard.
+- Predicts the future demand for ice cream flavors in a specific branch on a specific date.
 
-• C: historical data storage subsystem and background data responsible for the ELT process
-:(Extract, Load, Transform)
-o The subsystem will save details about the settlements in a MySQL database
-and their characteristics (they must be loaded once from the links below).
-o Upon arrival of a message with sales data, the current weather data will be extracted
-In the settlement and inquiry about a holiday in the coming week from network services (see below), data
-The message and the additional data will be saved within MongoDB as a document.
-o Given an instruction, the system prepares a set of data, adding to each known event the
-locality characteristics and turns to the Com.BigML service to create a tree-type prediction model
-decision (see explanations in the links below).
+---
+
+## 🍨 Ice Cream Flavors
+- Chocolate
+- Vanilla
+- Strawberry
+- Lemon
+- Halva
+
+---
+
+## 🧩 Subsystems Overview
+
+### A. Operational Subsystem – Sales Simulator
+- A simulator sends sales messages to a Kafka broker.
+- Each message represents a sale of one or more ice cream flavors from a branch.
+
+### B. Real-Time Dashboard Subsystem
+- Uses Redis to store and update current stock levels for each flavor in each branch.
+- Displays:
+  - **Bar Chart** – per-branch inventory per flavor.
+  - **Pie Chart** – total stock of each flavor across all branches.
+- Includes a prediction interface that allows:
+  - Requesting a prediction from the model in Subsystem C.
+  - Viewing predicted consumption for a given branch, flavor, and future date.
+
+### C. Historical Data & Prediction Subsystem
+- ELT process: Extract, Load, Transform
+- Stores locality information and characteristics in a MySQL database (loaded once from a static dataset).
+- On receiving a sale message:
+  - Fetches current weather in the relevant settlement.
+  - Checks if the coming week contains a holiday.
+  - Stores enriched data as a document in MongoDB.
+- On request:
+  - Prepares a dataset for training.
+  - Calls BigML to train a **Decision Tree model**.
+  - Enables prediction of future consumption per flavor/branch/date.
+
+---
+
+## 📊 Prediction Model Input Features
+- Day of the week
+- Month
+- Whether the week is a holiday week
+- Weather on the day (very cold, cold, pleasant, hot, very hot)
+- Consumption level (per flavor):
+  - Zero (under 1 kg)
+  - Low (up to 20 kg)
+  - Medium (up to 60 kg)
+  - High (up to 120 kg)
+  - Very high (over 120 kg)
+- Settlement size (ordinal scale: 8 levels)
+- Population type (Jewish, Arab, Mixed)
+- Age group distribution:
+  - 0–5
+  - 6–18 (children/youth)
+  - 19–45 (young adults)
+  - 46–55 (adults)
+  - 56+ (older adults)
+
+---
+
+## 🛠 Technologies Used
+- Kafka – for message streaming
+- Redis – for real-time inventory state
+- MySQL – for storing static demographic data
+- MongoDB – for document storage of enriched sales events
+- BigML – for training and serving predictions
+- Python – for all service implementations and simulation logic
+
+---
+
+## 📦 Setup Instructions
+To be added based on your deployment preferences (Docker Compose, local Python scripts, etc).
+
+---
+
+## ❤️ Built for educational and simulation purposes in big data & machine learning systems.
